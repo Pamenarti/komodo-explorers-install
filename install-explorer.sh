@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# (c) Decker, 2018-2020
+# (c) Paro, 2018-2020
 #
 
 # Additional info:
@@ -23,35 +23,35 @@ sudo apt --yes install build-essential pkg-config libc6-dev m4 g++-multilib auto
 sudo apt --yes install libcurl4-gnutls-dev
 sudo apt --yes install curl wget
 
-echo -e "$STEP_START[ Step 2 ]$STEP_END Building komodod"
+echo -e "$STEP_START[ Step 2 ]$STEP_END Building Lotuscoin"
 
 #if false; then
-if [ -f "$CUR_DIR/komodo/src/komodod" ]; then
-    echo "Komodo daemon binary already there, don't need to build ..."
-else
-    git clone -b dev https://github.com/KomodoPlatform/komodo
-    cd $CUR_DIR/komodo
-    zcutil/build.sh -j$(nproc)
-    cd $CUR_DIR
+#if [ -f "$CUR_DIR/komodo/src/komodod" ]; then
+#    echo "Komodo daemon binary already there, don't need to build ..."
+#else
+#    git clone -b dev https://github.com/Pamenarti/komodo
+#    cd $CUR_DIR/komodo
+#    zcutil/build.sh -j$(nproc)
+#    cd $CUR_DIR
 
-    if [ -f "$HOME/.zcash-params/sprout-proving.key" ] && [ -f "$HOME/.zcash-params/sprout-verifying.key" ];
-    then
-        echo Sprout files already here ...
-    else
-        cd $CUR_DIR/komodo
-        zcutil/fetch-params.sh
-        cd $CUR_DIR
-    fi
-fi
+#    if [ -f "$HOME/.zcash-params/sprout-proving.key" ] && [ -f "$HOME/.zcash-params/sprout-verifying.key" ];
+#    then
+#        echo Sprout files already here ...
+#    else
+#        cd $CUR_DIR/komodo
+#        zcutil/fetch-params.sh
+#        cd $CUR_DIR
+#    fi
+#fi
 
 echo -e "$STEP_START[ Step 3 ]$STEP_END Installing NodeJS and Bitcore Node"
-#git clone https://github.com/DeckerSU/bitcore-node-komodo
-#git clone https://github.com/DeckerSU/insight-api-komodo 
-#git clone https://github.com/DeckerSU/insight-ui-komodo
+#git clone https://github.com/Pamenarti/bitcore-node-komodo
+#git clone https://github.com/Pamenarti/insight-api-komodo 
+#git clone https://github.com/Pamenarti/insight-ui-komodo
 
-#git clone https://github.com/DeckerSU/bitcore-lib-komodo
-#git clone https://github.com/DeckerSU/bitcore-message-komodo
-#git clone https://github.com/DeckerSU/bitcore-build-komodo
+#git clone https://github.com/Pamenarti/bitcore-lib-komodo
+#git clone https://github.com/Pamenarti/bitcore-message-komodo
+#git clone https://github.com/Pamenarti/bitcore-build-komodo
 
 # install nodejs, n and other stuff
 sudo apt --yes install libsodium-dev
@@ -68,19 +68,19 @@ export NVM_DIR="$HOME/.nvm"
 nvm install v4
 # https://stackoverflow.com/questions/17509669/how-to-install-an-npm-package-from-github-directly
 
-npm install git+https://git@github.com/DeckerSU/bitcore-node-komodo # npm install bitcore
+npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo # npm install bitcore
 
-echo -e "$STEP_START[ Step 4 ]$STEP_END Creating komodod configs and deploy explorers"
+echo -e "$STEP_START[ Step 4 ]$STEP_END Creating lotuscoind configs and deploy explorers"
 
 # Start ports
-rpcport=8232
-zmqport=8332
+rpcport=8339
+zmqport=8339
 webport=3001
 
 # KMD config
-echo -e "$STEP_START[ Step 4.KMD ]$STEP_END Preparing KMD"
+echo -e "$STEP_START[ Step 4.KMD ]$STEP_END Preparing LotusCoin"
 mkdir -p $HOME/.komodo
-cat <<EOF > $HOME/.komodo/komodo.conf
+cat <<EOF > $HOME/.lotuscoin/lotuscoin.conf
 server=1
 whitelist=127.0.0.1
 txindex=1
@@ -91,29 +91,23 @@ zmqpubrawtx=tcp://127.0.0.1:$zmqport
 zmqpubhashblock=tcp://127.0.0.1:$zmqport
 rpcallowip=127.0.0.1
 rpcport=$rpcport
-rpcuser=bitcoin
+rpcuser=lotuscoinrpc
 rpcpassword=local321
-uacomment=bitcore
+uacomment=lotuscoin
 showmetrics=0
-#connect=172.17.112.30
+addnode=172.21.94.250
+addnode=45.144.152.90
 
-addnode=5.9.102.210
-addnode=78.47.196.146
-addnode=178.63.69.164
-addnode=88.198.65.74
-addnode=5.9.122.241
-addnode=144.76.94.38
-addnode=89.248.166.91
 EOF
 
-# Create KMD explorer and bitcore-node.json config for it
+# Create Lotus explorer and bitcore-node.json config for it
 
-$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create KMD-explorer
-cd KMD-explorer
-$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/DeckerSU/insight-api-komodo git+https://git@github.com/DeckerSU/insight-ui-komodo
+$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create Lotus-explorer
+cd Lotus-explorer
+$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/Pamenarti/insight-api-komodo git+https://git@github.com/Pamenarti/insight-ui-komodo
 cd $CUR_DIR
 
-cat << EOF > $CUR_DIR/KMD-explorer/bitcore-node.json
+cat << EOF > $CUR_DIR/Lotus-explorer/bitcore-node.json
 {
   "network": "mainnet",
   "port": $webport,
@@ -148,19 +142,17 @@ cat << EOF > $CUR_DIR/KMD-explorer/bitcore-node.json
 EOF
 
 # creating launch script for explorer
-cat << EOF > $CUR_DIR/KMD-explorer-start.sh
+cat << EOF > $CUR_DIR/Lotus-explorer-start.sh
 #!/bin/bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 cd KMD-explorer
 nvm use v4; ./node_modules/bitcore-node-komodo/bin/bitcore-node start
 EOF
-chmod +x KMD-explorer-start.sh
+chmod +x Lotus-explorer-start.sh
 
 # now we need to create assets configs for komodod and create explorers for each asset
-#declare -a kmd_coins=(REVS SUPERNET DEX PANGEA JUMBLR BET CRYPTO HODL MSHARK BOTS MGW COQUI WLC KV CEAL MESH MNZ AXO ETOMIC BTCH PIZZA BEER NINJA OOT BNTN CHAIN PRLPAY DSEC GLXT EQL)
 source $CUR_DIR/kmd_coins.sh
-#declare -a kmd_coins=(REVS)
 
 for i in "${kmd_coins[@]}"
 do
@@ -172,9 +164,9 @@ do
 
   if [[ ! " ${disabled_coins[@]} " =~ " ${i} " ]]; then # install only if coin not disabled
 
-   mkdir -p $HOME/.komodo/$i
-   touch $HOME/.komodo/$i/$i.conf
-cat <<EOF > $HOME/.komodo/$i/$i.conf
+   mkdir -p $HOME/.lotuscoin/$i
+   touch $HOME/.lotuscoin/$i/$i.conf
+cat <<EOF > $HOME/.lotuscoin/$i/$i.conf
 server=1
 whitelist=127.0.0.1
 txindex=1
@@ -185,24 +177,17 @@ zmqpubrawtx=tcp://127.0.0.1:$zmqport
 zmqpubhashblock=tcp://127.0.0.1:$zmqport
 rpcallowip=127.0.0.1
 rpcport=$rpcport
-rpcuser=bitcoin
+rpcuser=lotuscoinrpc
 rpcpassword=local321
-uacomment=bitcore
+uacomment=lotuscoin
 showmetrics=0
-#connect=172.17.112.30
-
-addnode=5.9.102.210
-addnode=78.47.196.146
-addnode=178.63.69.164
-addnode=88.198.65.74
-addnode=5.9.122.241
-addnode=144.76.94.38
-addnode=89.248.166.91
+addnode=172.21.94.250
+addnode=45.144.152.90
 EOF
 
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create $i-explorer
 cd $i-explorer
-$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/DeckerSU/insight-api-komodo git+https://git@github.com/DeckerSU/insight-ui-komodo
+$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/Pamenarti/insight-api-komodo git+https://git@github.com/Pamenarti/insight-ui-komodo
 cd $CUR_DIR
 
 cat << EOF > $CUR_DIR/$i-explorer/bitcore-node.json
@@ -221,7 +206,7 @@ cat << EOF > $CUR_DIR/$i-explorer/bitcore-node.json
         {
           "rpchost": "127.0.0.1",
           "rpcport": $rpcport,
-          "rpcuser": "bitcoin",
+          "rpcuser": "lotuscoinrpc",
           "rpcpassword": "local321",
           "zmqpubrawtx": "tcp://127.0.0.1:$zmqport"
         }
@@ -253,7 +238,5 @@ fi # install only if coin not disabled
 done
 
 echo -e "$STEP_START[ Step 5 ]$STEP_END Launching daemons"
-# cd $CUR_DIR/komodo/src
-# echo "pubkey=028eea44a09674dda00d88ffd199a09c9b75ba9782382cc8f1e97c0fd565fe5707" > pubkey.txt # remove this if you are not Decker :)
-# ./assetchains
+
 cd $CUR_DIR
