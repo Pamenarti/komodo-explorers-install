@@ -78,7 +78,7 @@ zmqport=8339
 webport=3001
 
 # KMD config
-echo -e "$STEP_START[ Step 4.KMD ]$STEP_END Preparing LotusCoin"
+echo -e "$STEP_START[ Step 4.LotusCoin ]$STEP_END Preparing LotusCoin"
 mkdir -p $HOME/.komodo
 cat <<EOF > $HOME/.lotuscoin/lotuscoin.conf
 server=1
@@ -146,7 +146,7 @@ cat << EOF > $CUR_DIR/Lotus-explorer-start.sh
 #!/bin/bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-cd KMD-explorer
+cd Lotus-explorer
 nvm use v4; ./node_modules/bitcore-node-komodo/bin/bitcore-node start
 EOF
 chmod +x Lotus-explorer-start.sh
