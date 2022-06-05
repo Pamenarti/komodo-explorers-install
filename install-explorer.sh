@@ -79,7 +79,7 @@ webport=3001
 
 # KMD config
 echo -e "$STEP_START[ Step 4.LotusCoin ]$STEP_END Preparing LotusCoin"
-mkdir -p $HOME/.komodos
+mkdir -p $HOME/.komodo
 cat <<EOF > $HOME/.lotuscoin/lotuscoin.conf
 server=1
 whitelist=127.0.0.1
