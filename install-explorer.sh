@@ -123,7 +123,7 @@ cat << EOF > $CUR_DIR/Lotus-explorer/bitcore-node.json
         {
           "rpchost": "127.0.0.1",
           "rpcport": $rpcport,
-          "rpcuser": "bitcoin",
+          "rpcuser": "lotuscoinrpc",
           "rpcpassword": "local321",
           "zmqpubrawtx": "tcp://127.0.0.1:$zmqport"
         }
