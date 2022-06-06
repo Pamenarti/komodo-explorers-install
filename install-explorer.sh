@@ -105,6 +105,8 @@ EOF
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create Lotus-explorer
 cd Lotus-explorer
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/Pamenarti/insight-api-komodo git+https://git@github.com/Pamenarti/insight-ui-komodo
+cd ..
+$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/Pamenarti/insight-api-komodo git+https://git@github.com/Pamenarti/insight-ui-komodo
 cd $CUR_DIR
 
 cat << EOF > $CUR_DIR/Lotus-explorer/bitcore-node.json
