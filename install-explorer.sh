@@ -45,6 +45,7 @@ echo -e "$STEP_START[ Step 2 ]$STEP_END Building Lotuscoin"
 #fi
 
 echo -e "$STEP_START[ Step 3 ]$STEP_END Installing NodeJS and Bitcore Node"
+mkdir Lotus-explorer
 git clone https://github.com/Pamenarti/bitcore-node-komodo
 git clone https://github.com/Pamenarti/insight-api-komodo 
 git clone https://github.com/Pamenarti/insight-ui-komodo
@@ -79,7 +80,7 @@ webport=3001
 
 # KMD config
 echo -e "$STEP_START[ Step 4.LotusCoin ]$STEP_END Preparing LotusCoin"
-mkdir -p $HOME/.komodo
+mkdir -p $HOME/.lotuscoin
 cat <<EOF > $HOME/.lotuscoin/lotuscoin.conf
 server=1
 whitelist=127.0.0.1
