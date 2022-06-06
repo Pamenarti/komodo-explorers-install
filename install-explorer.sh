@@ -69,12 +69,12 @@ nvm install v4
 # https://stackoverflow.com/questions/17509669/how-to-install-an-npm-package-from-github-directly
 
 npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo # npm install bitcore
-npm install git+https://git@github.com/DeckerSU/bitcore-lib-komodo
+npm install git+https://git@github.com/Pamenarti/bitcore-lib-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
+mkdir Lotus-explorer
 cd Lotus-explorer
-npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo # npm install bitcore
-npm install git+https://git@github.com/DeckerSU/bitcore-lib-komodo
+npm install git+https://git@github.com/Pamenarti/bitcore-lib-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
 EOF
