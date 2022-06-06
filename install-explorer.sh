@@ -78,8 +78,8 @@ npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo
 npm install git+https://git@github.com/Pamenarti/bitcore-lib-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
 npm install git+https://git@github.com/Pamenarti/insight-ui-komodo
-EOF
-echo -e "$STEP_START[ Step 4 ]$STEP_END Creating lotuscoind configs and deploy explorers"
+cd ..
+
 
 # Start ports
 rpcport=8339
