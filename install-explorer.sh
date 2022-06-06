@@ -46,6 +46,7 @@ echo -e "$STEP_START[ Step 2 ]$STEP_END Building Lotuscoin"
 
 echo -e "$STEP_START[ Step 3 ]$STEP_END Installing NodeJS and Bitcore Node"
 mkdir Lotus-explorer
+cd Lotus-explorer
 git clone https://github.com/Pamenarti/bitcore-node-komodo
 git clone https://github.com/Pamenarti/insight-api-komodo 
 git clone https://github.com/Pamenarti/insight-ui-komodo
