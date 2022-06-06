@@ -45,19 +45,19 @@ echo -e "$STEP_START[ Step 2 ]$STEP_END Building Lotuscoin"
 #fi
 
 echo -e "$STEP_START[ Step 3 ]$STEP_END Installing NodeJS and Bitcore Node"
-#git clone https://github.com/Pamenarti/bitcore-node-komodo
-#git clone https://github.com/Pamenarti/insight-api-komodo 
-#git clone https://github.com/Pamenarti/insight-ui-komodo
+git clone https://github.com/Pamenarti/bitcore-node-komodo
+git clone https://github.com/Pamenarti/insight-api-komodo 
+git clone https://github.com/Pamenarti/insight-ui-komodo
 
-#git clone https://github.com/Pamenarti/bitcore-lib-komodo
-#git clone https://github.com/Pamenarti/bitcore-message-komodo
-#git clone https://github.com/Pamenarti/bitcore-build-komodo
+git clone https://github.com/Pamenarti/bitcore-lib-komodo
+git clone https://github.com/Pamenarti/bitcore-message-komodo
+git clone https://github.com/Pamenarti/bitcore-build-komodo
 
 # install nodejs, n and other stuff
 sudo apt --yes install libsodium-dev
 sudo apt --yes install libzmq3-dev
-# sudo npm install n -g
-# sudo n stable
+sudo npm install n -g
+sudo n stable
 
 # install nvm # https://github.com/nvm-sh/nvm#install--update-script
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.35.0/install.sh | bash
