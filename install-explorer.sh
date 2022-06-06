@@ -71,7 +71,7 @@ nvm install v4
 npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo # npm install bitcore
 npm install git+https://git@github.com/DeckerSU/bitcore-lib-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
-npm install git+https://git@github.com/Pamenarti/insight-api-komodo
+npm install git+https://git@github.com/Pamenarti/insight-ui-komodo
 echo -e "$STEP_START[ Step 4 ]$STEP_END Creating lotuscoind configs and deploy explorers"
 
 # Start ports
