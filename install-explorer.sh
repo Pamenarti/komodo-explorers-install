@@ -69,17 +69,10 @@ nvm install v4
 # https://stackoverflow.com/questions/17509669/how-to-install-an-npm-package-from-github-directly
 
 npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo # npm install bitcore
-npm install git+https://git@github.com/Pamenarti/bitcore-lib-komodo
+npm install git+https://git@github.com/DeckerSU/bitcore-lib-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
-npm install git+https://git@github.com/Pamenarti/insight-ui-komodo
-mkdir Lotus-explorer
-cd Lotus-explorer
-npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo 
-npm install git+https://git@github.com/Pamenarti/bitcore-lib-komodo
 npm install git+https://git@github.com/Pamenarti/insight-api-komodo
-npm install git+https://git@github.com/Pamenarti/insight-ui-komodo
-cd ..
-
+echo -e "$STEP_START[ Step 4 ]$STEP_END Creating lotuscoind configs and deploy explorers"
 
 # Start ports
 rpcport=8339
@@ -107,13 +100,20 @@ showmetrics=0
 addnode=172.21.94.250
 addnode=45.144.152.90
 
+EOF
 
 # Create Lotus explorer and bitcore-node.json config for it
 
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create Lotus-explorer
 cd Lotus-explorer
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/Pamenarti/insight-api-komodo git+https://git@github.com/Pamenarti/insight-ui-komodo
+npm install git+https://git@github.com/Pamenarti/bitcore-node-komodo 
+npm install git+https://git@github.com/Pamenarti/bitcore-lib-komodo
+npm install git+https://git@github.com/Pamenarti/insight-api-komodo
+npm install git+https://git@github.com/Pamenarti/insight-ui-komodo
+
 cd $CUR_DIR
+
 
 cat << EOF > $CUR_DIR/Lotus-explorer/bitcore-node.json
 {
